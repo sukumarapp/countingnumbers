@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    font-family: sans-serif;
+    /* background-color: #add8e6; */ /* Light blue background - removed */
+    background-image: url('images/background.png'); /* Add your background image here */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Don't repeat the image */
+    min-height: 100vh; /* Ensure full viewport height */
+    width: 100vw; /* Ensure full viewport width */
+}
+
+#game-container {
+    position: fixed; /* Use fixed to overlay correctly */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure it's above the background but below UI */
+    /* background-color: rgba(0, 0, 0, 0.2); */ /* Removed overlay */
+}
+
+canvas {
+    display: block; /* Remove extra space below canvas */
+    position: absolute; /* Position absolutely within game-container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#ui-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    pointer-events: none; /* Allow clicks to pass through to canvas initially */
+    color: #333;
+    z-index: 2; /* Ensure UI is above the canvas */
+}
+
+#count-display {
+    position: absolute; /* Position relative to overlay */
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1.5em; /* Larger font for visibility */
+    pointer-events: auto; /* Make it clickable if needed (not here though) */
+}
+
+#final-question {
+    margin-top: 20%; /* Push down from the top */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    pointer-events: auto; /* Enable interaction */
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#final-question p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+#answer-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
+
+#answer-buttons button {
+    /* Apply dynamic size styles */
+    padding: 2vmin 1vmin; /* Adjusted padding (less horizontal needed with fixed width) */
+    font-size: clamp(2em, 8vw, 4.8em); /* Font size relative to viewport width, clamped */
+    width: 20vmin; /* Fixed width based on smaller viewport dimension */
+    margin: 1.5vmin;   /* Margin based on smaller viewport dimension */
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    /* Ensure buttons can shrink if needed, but don't grow */
+    flex-shrink: 1;
+    /* Center text inside the button */
+    text-align: center;
+    /* Consider adding a max-width if they get too wide on huge screens */
+    /* max-width: 250px; */
+}
+
+#answer-buttons button:hover {
+    background-color: #ddd;
+}
+
+#feedback {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+#feedback.correct {
+    color: green;
+}
+
+#feedback.incorrect {
+    color: red;
+}
+
+
+#restart-button {
+    /* position: absolute; */ /* Removed */
+    /* top: 20px; */ /* Removed */
+    /* right: 20px; */ /* Removed */
+    display: block; /* Make it a block element for auto margins */
+    margin: 15px auto; /* Center horizontally, add vertical margin */
+    padding: 15px 30px; /* Restore original padding */
+    font-size: 1.2em; /* Restore original font size */
+    cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    pointer-events: auto; /* Enable interaction */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+#restart-button:hover {
+    background-color: #45a049;
+}
+
+
+.hidden {
+    display: none !important; /* Use important to override other styles */
+}
+
+/* Make answer buttons bigger */
+/* REMOVED this entire rule as it was less specific */
+/* .answer-button { */
+/*     padding: 30px 50px; */
+/*     font-size: 4.8em; */
+/*     min-width: 190px; */
+/*     margin: 10px; */
+/*     cursor: pointer; */
+/*     border: 1px solid #ccc; */
+/*     border-radius: 5px; */
+/*     background-color: #f0f0f0; */
+/* } */
+
+/* Style the container holding the buttons if needed */
+/* REMOVED duplicated rule below */
+/* #answer-buttons { */
+/*     display: flex; */
+/*     flex-wrap: wrap; */
+/*     justify-content: center; */
+/*     gap: 10px; */
+/* } */
+
+#range-selection {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Position on the top right */
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px 15px;
+    border-radius: 5px;
+    pointer-events: auto; /* Allow interaction */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#range-selection label {
+    font-size: 0.9em;
+    margin-right: 2px;
+}
+
+#range-selection input[type="number"] {
+    width: 40px; /* Small width for number input */
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
